@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,12 +33,16 @@ public class Post {
 	@Column(name = "post_id")
 	private Long id;
 
+
 	private String content;
 
+	@NotNull
 	private String title;
 
-	private Long likes;
+	@NotNull
+	private Long likes = 0L;
 
+	@NotNull
 	private Long user_id;
 
 }
