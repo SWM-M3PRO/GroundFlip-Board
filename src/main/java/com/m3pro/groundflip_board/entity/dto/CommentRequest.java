@@ -17,14 +17,10 @@ public class CommentRequest {
 	@Schema(description = "댓글 내용", example = "안녕하세요")
 	private String content;
 
-	@Schema(description = "댓글 제목", example = "제목")
-	private String title;
-
 	@Schema(description = "유저 id", example = "622")
 	private Long userId;
 
 	@Schema(description = "게시글 id", example = "1")
 	private Long postId;
-
 
 }

@@ -33,16 +33,30 @@ public class Post {
 	@Column(name = "post_id")
 	private Long id;
 
-
 	private String content;
 
 	@NotNull
 	private String title;
 
 	@NotNull
-	private Long likes = 0L;
+	private Long likes;
 
 	@NotNull
 	private Long user_id;
 
+	public void updateTitle(String title) {
+		this.title = title;
+	}
+
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	public void addLikes() {
+		this.likes += 1;
+	}
+
+	public void subtractLikes() {
+		this.likes -= 1;
+	}
 }

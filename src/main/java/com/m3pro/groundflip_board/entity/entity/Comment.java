@@ -39,4 +39,16 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id")
 	private Post post;
+
+	public void updateContent(String content) {
+		this.content = content;
+	}
+
+	public void addLikes() {
+		this.likes += 1;
+	}
+
+	public void subtractLikes(){
+		this.likes -= 1;
+	}
 }
