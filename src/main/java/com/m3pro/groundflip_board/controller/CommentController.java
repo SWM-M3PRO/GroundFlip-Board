@@ -32,7 +32,7 @@ public class CommentController {
 		@RequestBody CommentRequest commentRequest
 	){
 		commentService.postComment(commentRequest);
-		return ResponseEntity.ok(200);
+		return ResponseEntity.ok(201);
 	}
 
 	@Operation(summary = "댓글 수정", description = "content 수정")

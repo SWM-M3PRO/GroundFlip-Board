@@ -2,6 +2,7 @@ package com.m3pro.groundflip_board.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,28 +32,28 @@ public class PostController {
 	public ResponseEntity<Integer> postPost(
 		@Parameter(description = "게시글 info", required = true)
 		@RequestBody PostRequest postRequest) {
-		postService.postPost(postRequest);
-		return ResponseEntity.ok(200);
+		postService.createPost(postRequest);
+		return ResponseEntity.ok(201);
 	}
 
 	@Operation(summary = "게시글 수정", description = "title, content 수정")
-	@PutMapping("/post")
+	@PutMapping("/post/{postId}")
 	public ResponseEntity<Integer> putPost(
 		@Parameter(description = "게시글 info", required = true)
-		@RequestParam Long id,
+		@PathVariable Long postId,
 		@RequestBody PostRequest postRequest
 	) {
-		postService.putPost(id, postRequest);
+		postService.putPost(postId, postRequest);
 		return ResponseEntity.ok(200);
 	}
 
 	@Operation(summary = "게시글 삭제", description = "게시글 삭제")
-	@DeleteMapping("/post")
+	@DeleteMapping("/post/{postId}")
 	public ResponseEntity<Integer> deletePost(
 		@Parameter(description = "게시글 info", required = true)
-		@RequestParam Long id
+		@PathVariable Long postId
 	){
-		postService.deletePost(id);
+		postService.deletePost(postId);
 		return ResponseEntity.ok(200);
 	}
 

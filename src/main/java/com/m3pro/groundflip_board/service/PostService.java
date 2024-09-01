@@ -18,12 +18,12 @@ public class PostService {
 	private final PostRepository postRepository;
 
 	@Transactional
-	public void postPost(PostRequest postRequest) {
+	public void createPost(PostRequest postRequest) {
 		postRepository.save(
 			Post.builder()
 				.title(postRequest.getTitle())
 				.content(postRequest.getContent())
-				.user_id(postRequest.getUserId())
+				.userId(postRequest.getUserId())
 				.likes(0L)
 				.build());
 	}

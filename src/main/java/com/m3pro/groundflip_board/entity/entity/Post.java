@@ -1,6 +1,10 @@
 package com.m3pro.groundflip_board.entity.entity;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.processing.Pattern;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Post {
+public class Post extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +46,7 @@ public class Post {
 	private Long likes;
 
 	@NotNull
-	private Long user_id;
+	private Long userId;
 
 	public void updateTitle(String title) {
 		this.title = title;

@@ -26,7 +26,7 @@ public class CommentService {
 		commentRepository.save(
 			Comment.builder()
 				.content(commentRequest.getContent())
-				.user_id(commentRequest.getUserId())
+				.userId(commentRequest.getUserId())
 				.post(post)
 				.build()
 		);
