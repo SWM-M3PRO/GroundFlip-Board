@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m3pro.groundflip_board.entity.dto.PostRequest;
-import com.m3pro.groundflip_board.entity.entity.Post;
 import com.m3pro.groundflip_board.service.PostService;
 
 import io.swagger.v3.oas.annotations.Operation;
