@@ -30,6 +30,7 @@ public class Comment extends BaseTimeEntity{
 	@Column(name = "comment_id")
 	private Long id;
 
+	@Column(columnDefinition = "TEXT")
 	private String content;
 
 	private Long likes;
