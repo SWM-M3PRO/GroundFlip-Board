@@ -1,7 +1,7 @@
 package com.m3pro.groundflip_board.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.m3pro.groundflip_board.entity.dto.PostRequest;
@@ -18,12 +18,12 @@ public class PostService {
 	private final PostRepository postRepository;
 
 	@Transactional
-	public void postPost(PostRequest postRequest) {
+	public void createPost(PostRequest postRequest) {
 		postRepository.save(
 			Post.builder()
 				.title(postRequest.getTitle())
 				.content(postRequest.getContent())
-				.user_id(postRequest.getUserId())
+				.userId(postRequest.getUserId())
 				.likes(0L)
 				.build());
 	}
@@ -43,5 +43,15 @@ public class PostService {
 			.orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
 		postRepository.delete(post);
+	}
+
+	public List<Post> getAllPosts(){
+		List<Post> posts = postRepository.findAll();
+		return posts;
+	}
+
+	public List<Post> getUserPosts(Long userId){
+		List<Post> posts = postRepository.findByUserId(userId);
+		return posts;
 	}
 }

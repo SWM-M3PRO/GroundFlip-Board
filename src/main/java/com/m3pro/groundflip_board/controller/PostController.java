@@ -1,12 +1,15 @@
 package com.m3pro.groundflip_board.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m3pro.groundflip_board.entity.dto.PostRequest;
@@ -31,29 +34,46 @@ public class PostController {
 	public ResponseEntity<Integer> postPost(
 		@Parameter(description = "게시글 info", required = true)
 		@RequestBody PostRequest postRequest) {
-		postService.postPost(postRequest);
-		return ResponseEntity.ok(200);
+		postService.createPost(postRequest);
+		return ResponseEntity.ok(201);
 	}
 
 	@Operation(summary = "게시글 수정", description = "title, content 수정")
-	@PutMapping("/post")
+	@PutMapping("/post/{postId}")
 	public ResponseEntity<Integer> putPost(
 		@Parameter(description = "게시글 info", required = true)
-		@RequestParam Long id,
+		@PathVariable Long postId,
 		@RequestBody PostRequest postRequest
 	) {
-		postService.putPost(id, postRequest);
+		postService.putPost(postId, postRequest);
 		return ResponseEntity.ok(200);
 	}
 
 	@Operation(summary = "게시글 삭제", description = "게시글 삭제")
-	@DeleteMapping("/post")
+	@DeleteMapping("/post/{postId}")
 	public ResponseEntity<Integer> deletePost(
 		@Parameter(description = "게시글 info", required = true)
-		@RequestParam Long id
-	){
-		postService.deletePost(id);
+		@PathVariable Long postId
+	) {
+		postService.deletePost(postId);
 		return ResponseEntity.ok(200);
+	}
+
+	@Operation(summary = "게시글 조회", description = "게시글 조회")
+	@GetMapping("/post")
+	public ResponseEntity<List<Post>> getAllPosts() {
+		List<Post> posts = postService.getAllPosts();
+		return ResponseEntity.ok(posts);
+	}
+
+	@Operation(summary = "user 게시글 조회", description = "user 게시글 조회")
+	@GetMapping("/post/{userId}")
+	public ResponseEntity<List<Post>> getUserPosts(
+		@Parameter(description = "userId", required = true)
+		@PathVariable Long userId
+	){
+		List<Post> posts = postService.getUserPosts(userId);
+		return ResponseEntity.ok(posts);
 	}
 
 }
