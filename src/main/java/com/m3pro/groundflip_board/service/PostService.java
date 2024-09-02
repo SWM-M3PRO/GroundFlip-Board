@@ -1,7 +1,7 @@
 package com.m3pro.groundflip_board.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.m3pro.groundflip_board.entity.dto.PostRequest;
@@ -43,5 +43,15 @@ public class PostService {
 			.orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
 		postRepository.delete(post);
+	}
+
+	public List<Post> getAllPosts(){
+		List<Post> posts = postRepository.findAll();
+		return posts;
+	}
+
+	public List<Post> getUserPosts(Long userId){
+		List<Post> posts = postRepository.findByUserId(userId);
+		return posts;
 	}
 }

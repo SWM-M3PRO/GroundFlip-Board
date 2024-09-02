@@ -1,7 +1,10 @@
 package com.m3pro.groundflip_board.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m3pro.groundflip_board.entity.dto.PostRequest;
+import com.m3pro.groundflip_board.entity.entity.Post;
 import com.m3pro.groundflip_board.service.PostService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,11 +54,26 @@ public class PostController {
 	public ResponseEntity<Integer> deletePost(
 		@Parameter(description = "게시글 info", required = true)
 		@PathVariable Long postId
-	){
+	) {
 		postService.deletePost(postId);
 		return ResponseEntity.ok(200);
 	}
 
+	@Operation(summary = "게시글 조회", description = "게시글 조회")
+	@GetMapping("/post")
+	public ResponseEntity<List<Post>> getAllPosts() {
+		List<Post> posts = postService.getAllPosts();
+		return ResponseEntity.ok(posts);
+	}
 
+	@Operation(summary = "user 게시글 조회", description = "user 게시글 조회")
+	@GetMapping("/post/{userId}")
+	public ResponseEntity<List<Post>> getUserPosts(
+		@Parameter(description = "userId", required = true)
+		@PathVariable Long userId
+	){
+		List<Post> posts = postService.getUserPosts(userId);
+		return ResponseEntity.ok(posts);
+	}
 
 }
